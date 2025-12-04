@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '@/components/Header';
 import LevelTitle from '@/components/LevelTitle';
@@ -12,11 +12,19 @@ import { Shield, ArrowLeft } from 'lucide-react';
 
 const TeamLogin = () => {
   const navigate = useNavigate();
-  const { loginTeam } = useAuth();
+  const { loginTeam, isTeamLoggedIn } = useAuth();
+
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+
+  // 🔥 AUTO-REDIRECT IF ALREADY LOGGED-IN (prevents going to login page)
+  useEffect(() => {
+    if (isTeamLoggedIn) {
+      navigate('/game', { replace: true });
+    }
+  }, [isTeamLoggedIn, navigate]);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -52,11 +60,8 @@ const TeamLogin = () => {
 
     toast.success(`Welcome, ${data.team_name}!`);
     
-    if (data.completed) {
-      navigate('/completion');
-    } else {
-      navigate('/game');
-    }
+    if (data.completed) navigate('/completion');
+    else navigate('/game');
   };
 
   return (
@@ -78,12 +83,13 @@ const TeamLogin = () => {
           <div className="flex items-center justify-center mb-6">
             <Shield className="w-12 h-12 text-primary animate-pulse-glow" />
           </div>
-          
+
           <h2 className="text-2xl font-orbitron font-bold text-center text-primary text-glow mb-2">
             Team Login
           </h2>
+
           <p className="text-center text-muted-foreground text-sm mb-6 font-mono-tech">
-            Secure Access Only - No Sign Up
+            Secure Access Only — No Sign Up
           </p>
 
           <form onSubmit={handleLogin} className="space-y-4">
@@ -130,7 +136,7 @@ const TeamLogin = () => {
           </form>
 
           <p className="text-xs text-center text-muted-foreground mt-4 font-mono-tech">
-            Only Shortlisted Teams Can Access
+            Only Selected Teams Can Access
           </p>
         </CyberCard>
 
