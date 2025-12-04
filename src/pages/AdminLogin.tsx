@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '@/components/Header';
 import LevelTitle from '@/components/LevelTitle';
@@ -12,11 +12,19 @@ import { ShieldCheck, ArrowLeft } from 'lucide-react';
 
 const AdminLogin = () => {
   const navigate = useNavigate();
-  const { loginAdmin } = useAuth();
+  const { loginAdmin, isAdminLoggedIn } = useAuth();
+
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+
+  // 🔥 AUTO REDIRECT IF ADMIN ALREADY LOGGED IN
+  useEffect(() => {
+    if (isAdminLoggedIn) {
+      navigate('/admin', { replace: true });
+    }
+  }, [isAdminLoggedIn, navigate]);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -55,11 +63,11 @@ const AdminLogin = () => {
   return (
     <div className="min-h-screen flex flex-col cyber-grid">
       <Header />
-      
+
       <main className="flex-1 flex flex-col items-center justify-center px-4 py-8">
         <button
           onClick={() => navigate('/')}
-          className="absolute top-24 left-4 flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors"
+          className="absolute top-24 left-4 flex items-center gap-2 text-muted-foreground hover:text-secondary transition-colors"
         >
           <ArrowLeft className="w-4 h-4" />
           <span className="font-mono-tech text-sm">Back</span>
@@ -71,10 +79,11 @@ const AdminLogin = () => {
           <div className="flex items-center justify-center mb-6">
             <ShieldCheck className="w-12 h-12 text-secondary animate-pulse-glow" />
           </div>
-          
+
           <h2 className="text-2xl font-orbitron font-bold text-center text-secondary text-glow mb-2">
             Admin Panel
           </h2>
+
           <p className="text-center text-muted-foreground text-sm mb-6 font-mono-tech">
             Authorized Personnel Only
           </p>
@@ -88,7 +97,7 @@ const AdminLogin = () => {
               placeholder="Enter admin username"
               autoComplete="username"
             />
-            
+
             <CyberInput
               label="Password"
               type="password"
