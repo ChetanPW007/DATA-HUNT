@@ -1,0 +1,230 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 170 30% 4%;
+    --foreground: 170 100% 95%;
+
+    --card: 170 30% 8%;
+    --card-foreground: 170 100% 95%;
+
+    --popover: 170 30% 8%;
+    --popover-foreground: 170 100% 95%;
+
+    --primary: 170 70% 45%;
+    --primary-foreground: 170 30% 4%;
+
+    --secondary: 320 100% 60%;
+    --secondary-foreground: 170 100% 95%;
+
+    --muted: 170 25% 15%;
+    --muted-foreground: 170 35% 60%;
+
+    --accent: 45 100% 55%;
+    --accent-foreground: 170 30% 4%;
+
+    --destructive: 0 85% 55%;
+    --destructive-foreground: 170 100% 95%;
+
+    --border: 170 50% 25%;
+    --input: 170 30% 12%;
+    --ring: 170 70% 45%;
+
+    --radius: 0.75rem;
+
+    /* Custom design tokens */
+    --neon-cyan: 170 70% 45%;
+    --neon-purple: 320 100% 60%;
+    --neon-gold: 45 100% 55%;
+    --neon-pink: 330 100% 60%;
+    
+    --glow-sm: 0 0 10px hsl(var(--primary) / 0.5);
+    --glow-md: 0 0 20px hsl(var(--primary) / 0.5), 0 0 40px hsl(var(--primary) / 0.3);
+    --glow-lg: 0 0 30px hsl(var(--primary) / 0.6), 0 0 60px hsl(var(--primary) / 0.4), 0 0 90px hsl(var(--primary) / 0.2);
+    
+    --gradient-cyber: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--secondary)) 100%);
+    --gradient-gold: linear-gradient(135deg, hsl(45 100% 55%) 0%, hsl(35 100% 45%) 100%);
+    --gradient-dark: linear-gradient(180deg, hsl(170 25% 6%) 0%, hsl(0 0% 0%) 100%);
+    --gradient-title: linear-gradient(90deg, hsl(330 100% 65%) 0%, hsl(280 100% 60%) 25%, hsl(200 100% 60%) 75%, hsl(180 100% 60%) 100%);
+    
+    --sidebar-background: 170 25% 6%;
+    --sidebar-foreground: 170 100% 95%;
+    --sidebar-primary: 170 70% 45%;
+    --sidebar-primary-foreground: 170 30% 4%;
+    --sidebar-accent: 170 30% 12%;
+    --sidebar-accent-foreground: 170 100% 95%;
+    --sidebar-border: 170 50% 20%;
+    --sidebar-ring: 170 70% 45%;
+  }
+
+  .dark {
+    --background: 170 30% 4%;
+    --foreground: 170 100% 95%;
+    --card: 170 30% 8%;
+    --card-foreground: 170 100% 95%;
+    --popover: 170 30% 8%;
+    --popover-foreground: 170 100% 95%;
+    --primary: 170 70% 45%;
+    --primary-foreground: 170 30% 4%;
+    --secondary: 320 100% 60%;
+    --secondary-foreground: 170 100% 95%;
+    --muted: 170 25% 15%;
+    --muted-foreground: 170 35% 60%;
+    --accent: 45 100% 55%;
+    --accent-foreground: 170 30% 4%;
+    --destructive: 0 85% 55%;
+    --destructive-foreground: 170 100% 95%;
+    --border: 170 50% 25%;
+    --input: 170 30% 12%;
+    --ring: 170 70% 45%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-rajdhani antialiased;
+    background-image: 
+      radial-gradient(ellipse at top, hsl(170 40% 8%) 0%, transparent 40%),
+      radial-gradient(ellipse at bottom right, hsl(170 50% 12% / 0.4) 0%, transparent 50%),
+      radial-gradient(ellipse at bottom left, hsl(160 40% 6% / 0.3) 0%, transparent 40%),
+      linear-gradient(180deg, hsl(170 30% 3%) 0%, hsl(0 0% 0%) 50%, hsl(170 20% 4%) 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-orbitron tracking-wider;
+  }
+}
+
+@layer utilities {
+  .font-orbitron {
+    font-family: 'Orbitron', sans-serif;
+  }
+
+  .font-rajdhani {
+    font-family: 'Rajdhani', sans-serif;
+  }
+
+  .font-mono-tech {
+    font-family: 'Share Tech Mono', monospace;
+  }
+
+  .text-glow {
+    text-shadow: var(--glow-sm);
+  }
+
+  .text-glow-md {
+    text-shadow: var(--glow-md);
+  }
+
+  .text-glow-lg {
+    text-shadow: var(--glow-lg);
+  }
+
+  .box-glow {
+    box-shadow: var(--glow-sm);
+  }
+
+  .box-glow-md {
+    box-shadow: var(--glow-md);
+  }
+
+  .box-glow-lg {
+    box-shadow: var(--glow-lg);
+  }
+
+  .gradient-cyber {
+    background: var(--gradient-cyber);
+  }
+
+  .gradient-gold {
+    background: var(--gradient-gold);
+  }
+
+  .gradient-title {
+    background: var(--gradient-title);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .border-glow {
+    border: 1px solid hsl(var(--primary) / 0.5);
+    box-shadow: inset 0 0 20px hsl(var(--primary) / 0.1), var(--glow-sm);
+  }
+
+  .cyber-grid {
+    background-image: 
+      linear-gradient(hsl(var(--primary) / 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--primary) / 0.05) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+
+  .font-cinzel {
+    font-family: 'Cinzel Decorative', serif;
+  }
+
+  .animate-pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  .animate-flicker {
+    animation: flicker 3s linear infinite;
+  }
+
+  .animate-scan-line {
+    animation: scan-line 8s linear infinite;
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 1;
+    filter: brightness(1);
+  }
+  50% {
+    opacity: 0.8;
+    filter: brightness(1.2);
+  }
+}
+
+@keyframes flicker {
+  0%, 19.999%, 22%, 62.999%, 64%, 64.999%, 70%, 100% {
+    opacity: 1;
+  }
+  20%, 21.999%, 63%, 63.999%, 65%, 69.999% {
+    opacity: 0.4;
+  }
+}
+
+@keyframes scan-line {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100vh);
+  }
+}
+
+@keyframes gradient-shift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient-shift 3s ease infinite;
+}
